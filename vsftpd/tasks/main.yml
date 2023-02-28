@@ -1,0 +1,28 @@
+---
+# tasks file for vsftpd
+- name: apt update
+  apt:
+    update_cache: yes
+
+- name: Install vsFTPd
+  apt:
+    name: vsftpd
+    state: latest
+
+- name: Enable service
+  service:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: remove /etc/vsftpd.conf
+  file:
+    path: /etc/vsftpd.conf
+    state: absent
+
+- name: add /etc/vsftpd.conf
+  copy:
+    src: /etc/ansible/roles/vsftpd/files/vsftpd.conf
+    dest: /etc/vsftpd.conf
+    remote_src: yes
+  notify: restart_vsftpd
