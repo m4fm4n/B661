@@ -9,12 +9,6 @@
     name: vsftpd
     state: latest
 
-- name: Enable service
-  service:
-    name: docker
-    enabled: yes
-    state: started
-
 - name: remove /etc/vsftpd.conf
   file:
     path: /etc/vsftpd.conf
